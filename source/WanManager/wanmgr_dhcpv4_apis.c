@@ -920,10 +920,12 @@ WanMgr_DmlDhcpcGetInfo
         PDML_DHCPC_INFO        pInfo
     )
 {
+    v_secure_system("echo ' Inside WanMgr_DmlDhcpcGetInfo' >>/tmp/test_logs");
     UNREFERENCED_PARAMETER(hContext);
     ANSC_STATUS  rc;
 
     if ( (!pInfo) || (ulInstanceNumber != 1) ){
+            v_secure_system("echo ' ANSC_STATUS_FAILURE' >>/tmp/test_logs");
         return ANSC_STATUS_FAILURE;
     }
 
@@ -941,9 +943,10 @@ WanMgr_DmlDhcpcGetInfo
 	pInfo->DHCPStatus = ((strcmp(p_VirtIf->IP.Ipv4Data.dhcpState, DHCP_STATE_BOUND) == 0) || 
                        (strcmp(p_VirtIf->IP.Ipv4Data.dhcpState, DHCP_STATE_RENEW) == 0)) ? DML_DHCPC_STATUS_Bound : DML_DHCPC_STATUS_Init;
         pInfo->LeaseTimeRemaining  = (p_VirtIf->IP.Ipv4Data.leaseReceivedTime + p_VirtIf->IP.Ipv4Data.leaseTime) - WanManager_getUpTime();
+        v_secure_system("echo 'pInfo->IPAddress.Value=%lu, pInfo->LeaseTimeRemaining=%d >>/tmp/test_logs", pInfo->IPAddress.Value, pInfo->LeaseTimeRemaining);
         WanMgrDml_GetIfaceData_release(NULL);
     }
-
+    v_secure_system("echo ' ANSC_STATUS_SUCCESS' >>/tmp/test_logs");
     pInfo->NumDnsServers = 2;
     pInfo->NumIPRouters = 1;
     return ANSC_STATUS_SUCCESS;
@@ -959,6 +962,7 @@ WanMgr_DmlDhcpcGetInfo
         PDML_DHCPC_INFO        pInfo
     )
 {
+        v_secure_system("echo ' Inside else case of wannmanger WanMgr_DmlDhcpcGetInfo' >>/tmp/test_logs");
     UNREFERENCED_PARAMETER(hContext);
         ULONG i;
         dhcpv4c_ip_list_t ad;
