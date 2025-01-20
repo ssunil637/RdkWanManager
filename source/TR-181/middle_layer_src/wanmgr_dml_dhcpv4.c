@@ -639,10 +639,16 @@ Client_GetParamIntValue
         /* collect value */
 			v_secure_system("echo 'Inside Client_GetParamIntValue parameter = LeaseTimeRemaining' >>/tmp/test_logs");
         WanMgr_DmlDhcpcGetInfo(NULL, pCxtLink->InstanceNumber, &pDhcpc->Info);
-        
-        *pInt   = pDhcpc->Info.LeaseTimeRemaining;
-		v_secure_system("echo ' pDhcpc->Info.IPAddress.Value=%lu, pDhcpc->Info.LeaseTimeRemaining=%d' >>/tmp/test_logs", pDhcpc->Info.IPAddress.Value, pDhcpc->Info.LeaseTimeRemaining);
-        
+
+        if (pDhcpc->Info.IPAddress.Value) 
+        {
+            *pInt = pDhcpc->Info.LeaseTimeRemaining;            
+        }
+        else
+        {
+            *pInt = 0;
+        }
+          
         return TRUE;
     }
 

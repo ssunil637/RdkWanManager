@@ -946,7 +946,7 @@ WanMgr_DmlDhcpcGetInfo
         v_secure_system("echo 'pInfo->IPAddress.Value=%lu, pInfo->LeaseTimeRemaining=%d >>/tmp/test_logs", pInfo->IPAddress.Value, pInfo->LeaseTimeRemaining);
         WanMgrDml_GetIfaceData_release(NULL);
     }
-    v_secure_system("echo ' ANSC_STATUS_SUCCESS' >>/tmp/test_logs");
+
     pInfo->NumDnsServers = 2;
     pInfo->NumIPRouters = 1;
     return ANSC_STATUS_SUCCESS;
