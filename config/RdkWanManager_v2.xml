@@ -849,9 +849,9 @@
 
             <name>LeaseTimeRemaining</name>
 
-            <type>int[-1:]</type>
+            <type>unsignedInt</type>
 
-            <syntax>int</syntax>
+            <syntax>uint32</syntax>
 
             <notify>off</notify>
 

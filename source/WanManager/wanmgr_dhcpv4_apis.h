@@ -127,7 +127,7 @@ _DML_DHCPC_INFO
     ANSC_IPV4_ADDRESS               IPRouters[DML_DHCP_MAX_ENTRIES];
     ULONG                           NumDnsServers;
     ANSC_IPV4_ADDRESS               DNSServers[DML_DHCP_MAX_ENTRIES];
-    int                             LeaseTimeRemaining;
+    uint32_t                        LeaseTimeRemaining;
     ANSC_IPV4_ADDRESS               DHCPServer;
 }
 DML_DHCPC_INFO,  *PDML_DHCPC_INFO;

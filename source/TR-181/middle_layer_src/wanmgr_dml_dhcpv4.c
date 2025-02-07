@@ -629,22 +629,9 @@ Client_GetParamIntValue
         int*                        pInt
     )
 {
-    ANSC_STATUS                     returnStatus      = ANSC_STATUS_SUCCESS;
-    PDHCPC_CONTEXT_LINK_OBJECT pCxtLink          = (PDHCPC_CONTEXT_LINK_OBJECT)hInsContext;
-    PDML_DHCPC_FULL            pDhcpc            = (PDML_DHCPC_FULL)pCxtLink->hContext;
-
-    /* check the parameter name and return the corresponding value */
-    if (strcmp(ParamName, "LeaseTimeRemaining") == 0)
-    {
-        /* collect value */
-        WanMgr_DmlDhcpcGetInfo(NULL, pCxtLink->InstanceNumber, &pDhcpc->Info);
-        
-        *pInt   = pDhcpc->Info.LeaseTimeRemaining;
-        
-        return TRUE;
-    }
-
-    /* CcspTraceWarning(("Unsupported parameter '%s'\n", ParamName)); */
+    UNREFERENCED_PARAMETER(hInsContext);
+    UNREFERENCED_PARAMETER(ParamName);
+    UNREFERENCED_PARAMETER(pInt);
     return FALSE;
 }
 
@@ -755,6 +742,15 @@ Client_GetParamUlongValue
         
         *puLong = pDhcpc->Info.DHCPServer.Value;
         
+        return TRUE;
+    }
+
+    else if (strcmp(ParamName, "LeaseTimeRemaining") == 0)
+    {
+        /* collect value */
+        WanMgr_DmlDhcpcGetInfo(NULL, pCxtLink->InstanceNumber, &pDhcpc->Info);
+        *puLong = pDhcpc->Info.LeaseTimeRemaining;
+                  
         return TRUE;
     }
     
